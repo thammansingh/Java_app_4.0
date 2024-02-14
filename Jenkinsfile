@@ -73,14 +73,14 @@ pipeline{
                }
             }
         }
-        // stage ('Pushing Jar to Jfrog : python'){
-          // when { expression {  params.action == 'create' } }
-            // steps{
-             //  script{
-              //    jfrogPush()
-             //   }
-          //  }
-     //   }
+         stage ('Pushing Jar to Jfrog : python'){
+           when { expression {  params.action == 'create' } }
+             steps{
+               script{
+                  jfrogPush()
+                }
+            }
+        }
         stage('Docker Image Build'){
          when { expression {  params.action == 'create' } }
             steps{
@@ -103,7 +103,7 @@ pipeline{
           when { expression {  params.action == 'create' } }
           steps{
             script{
-                 sh 'curl -X PUT -u admin:password -T  /var/lib/jenkins/workspace/Java-application/target/kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar "http://18.234.253.20:8082/artifactory/example-repo-local/kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar"'
+                 sh 'curl -X PUT -u admin:RedHat@123 -T  /var/lib/jenkins/workspace/Java-application/target/kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar "http://65.0.4.57:8082/artifactory/example-repo-local/kubernetes-configmap-reload-0.0.1-SNAPSHOT.jar"'
                 }
             }
         }
